@@ -8,7 +8,6 @@ User = get_user_model()
 
 class UpCycleRequest(models.Model):
     requestsAt = models.DateField()
-    quantity = models.IntegerField()
     store = models.ForeignKey(User, on_delete=models.CASCADE)
     items = models.ManyToManyField(Item)
 
