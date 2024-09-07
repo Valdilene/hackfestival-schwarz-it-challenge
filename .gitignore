@@ -10,3 +10,6 @@ static-files
 media-files
 pycache
 */pycache
+
+.venv
+.vscode

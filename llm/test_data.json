@@ -1,0 +1,28 @@
+[
+    {"name": "Tomato Sauce", "quantity_g": 150},
+    {"name": "BBQ Sauce", "quantity_g": 100},
+    {"name": "Marinara Sauce", "quantity_g": 120},
+    
+    {"name": "Pepperoni", "quantity_g": 200},
+    {"name": "Chicken", "quantity_g": 180},
+    {"name": "Ham", "quantity_g": 170},
+    {"name": "Bacon", "quantity_g": 160},
+    
+    {"name": "Mozzarella", "quantity_g": 300},
+    {"name": "Parmesan", "quantity_g": 250},
+    {"name": "Cheddar", "quantity_g": 220},
+    {"name": "Goat Cheese", "quantity_g": 180},
+    
+    {"name": "Mushroom", "quantity_g": 100},
+    {"name": "Onion", "quantity_g": 90},
+    {"name": "Bell Pepper", "quantity_g": 80},
+    {"name": "Spinach", "quantity_g": 70},
+    {"name": "Black Olives", "quantity_g": 60},
+    
+    {"name": "Jalapenos", "quantity_g": 40},
+    {"name": "Pineapple", "quantity_g": 50},
+    {"name": "Oregano", "quantity_g": 30},
+    {"name": "Basil", "quantity_g": 20},
+    {"name": "Red Pepper Flakes", "quantity_g": 10},
+    {"name": "Garlic", "quantity_g": 15}
+]
