@@ -53,7 +53,6 @@ def classify_ingredients(ingredients: list[Ingredient], openai_client: OpenAI) -
     
     # map all ingredient objects by name
     mapped_ingredients = {i.name: i for i in ingredients}
-    print(ingredient_classes)
     prompt = (
         f"Classify the following ingredients for pizza preparation as one of the following categories: "
         "{ingredient_classes}"
