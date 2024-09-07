@@ -20,6 +20,7 @@ const ItemList = () => {
   const [upcycleBuffer, setUpcycleBuffer] = useState(0);
   const [filterUpscale, setFilterUpscale] = useState(false);
   const [selectedItems, setSelectedItems] = useState([]);
+  const [submittedItems, setSubmittedItems] = useState([]);
 
   useEffect(() => {
     // Fetch data using axios
@@ -73,12 +74,24 @@ const ItemList = () => {
     axios.post('http://127.0.0.1:8000/backend/api/request/', submitData)
       .then(response => {
         console.log('Data submitted successfully:', response.data);
-        // Optionally clear the selected items
-        setSelectedItems([]);
+
       })
       .catch(error => {
         console.error('Error submitting data', error);
       });
+    // Mark the selected items as submitted
+    setSubmittedItems(selectedItems);
+    setSelectedItems([]);
+    // Optionally clear the filter
+    // setFilterUpscale(false);
+  };
+
+  // Get the background color based on submission status
+  const getCardBackgroundColor = (item) => {
+    if (submittedItems.includes(item)) {
+      return '#4CAF50'; // Crude green background for submitted items
+    }
+    return getBackgroundColor(item.expiresAt);
   };
 
   return (
@@ -131,14 +144,14 @@ const ItemList = () => {
       <Grid container spacing={4}>
         {filteredItems.map((item, index) => (
           <Grid item xs={12} sm={6} md={4} lg={3} key={index} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <Card style={{ 
-              backgroundColor: getBackgroundColor(item.expiresAt),
-              color: getBackgroundColor(item.expiresAt) === '#F44336' ? 'white' : 'black',
+            <Card style={{
+              backgroundColor: getCardBackgroundColor(item),
+              color: getCardBackgroundColor(item) === '#4CAF50' ? 'white' : 'black',
               minWidth: '250px', // Ensure a minimum width for cards
               position: 'relative', // Position relative for checkmark
               paddingBottom: '80px' // Extra space for button at the bottom
             }}>
-              {getBackgroundColor(item.expiresAt) === '#FFD54F' && (
+              {getBackgroundColor(item.expiresAt) === '#FFD54F' && !submittedItems.includes(item) && (
                 <Checkbox
                   checked={selectedItems.includes(item)}
                   onChange={() => handleSelect(item)}
@@ -162,7 +175,7 @@ const ItemList = () => {
                   Weight: {item.weight}
                 </Typography>
               </CardContent>
-              {getBackgroundColor(item.expiresAt) === '#FFD54F' && (
+              {getBackgroundColor(item.expiresAt) === '#FFD54F' && !submittedItems.includes(item) && (
                 <Button
                   variant="contained"
                   color="primary"
