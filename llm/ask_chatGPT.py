@@ -73,5 +73,5 @@ def classify_ingredients(ingredients: list[Ingredient], openai_client: OpenAI) -
     parsed_categories = json.loads(categories)
     for ingredient_name, category in parsed_categories.items():
         mapped_ingredients[ingredient_name].category = category
-        
-    return [v for k, v in mapped_ingredients.items()]
+    
+    return [v for k, v in mapped_ingredients.items() if v.category != PizzaIngredientCategory.No]

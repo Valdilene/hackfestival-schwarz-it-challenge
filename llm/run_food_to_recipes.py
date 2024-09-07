@@ -39,6 +39,7 @@ def fetch_ingredients_from_url(url: str) -> list[Ingredient]:
         
         ingredients.append(ingredient)
 
+        requests.delete(f"http://127.0.0.1:8000/backend/api/items/{item['id']}")
     return ingredients
 
 
