@@ -9,13 +9,15 @@ import {
   Avatar,
   CardHeader,
   TextField,
+  Button
 } from '@mui/material';
 import InventoryIcon from '@mui/icons-material/Inventory';
 
 const ItemList = () => {
   const [items, setItems] = useState([]);
-  const [upcycledDate, setUpcycledDate] = useState('');
-  const [expireDate, setExpireDate] = useState('');
+  const [today, setToday] = useState('');
+  const [upcycleBuffer, setUpcycleBuffer] = useState(0);
+  const [filterUpscale, setFilterUpscale] = useState(false);
 
   useEffect(() => {
     // Fetch data using axios
@@ -33,17 +35,22 @@ const ItemList = () => {
   // Helper function to get the background color based on dates
   const getBackgroundColor = (expiresAt) => {
     const expiration = new Date(expiresAt);
-    const upcycled = new Date(upcycledDate);
-    const expire = new Date(expireDate);
+    const todayDate = new Date(today);
+    const bufferDate = new Date(todayDate);
+    bufferDate.setDate(bufferDate.getDate() + upcycleBuffer);
 
-    if (expiration >= upcycled && expiration <= expire) {
-      return '#FFD54F'; // Warm yellow background
-    } else if (expiration > expire) {
+    if (expiration < todayDate) {
       return '#F44336'; // Calm red background
+    } else if (expiration < bufferDate) {
+      return '#FFD54F'; // Warm yellow background
     }
     return 'white'; // Default background
   };
 
+  // Filter items based on filterUpscale state
+  const filteredItems = filterUpscale
+    ? items.filter(item => getBackgroundColor(item.expiresAt) === '#FFD54F')
+    : items;
 
   return (
     <Container maxWidth="lg" style={{ marginTop: '20px' }}>
@@ -54,36 +61,49 @@ const ItemList = () => {
       <Grid container spacing={2} style={{ marginBottom: '20px' }}>
         <Grid item xs={12} sm={6} md={3}>
           <TextField
-            label="Upcycled Date"
+            label="Today"
             type="date"
             fullWidth
             InputLabelProps={{
               shrink: true,
             }}
-            value={upcycledDate}
-            onChange={(e) => setUpcycledDate(e.target.value)}
+            value={today}
+            onChange={(e) => setToday(e.target.value)}
+            InputProps={{
+              style: { backgroundColor: 'white' } // Ensure background is white
+            }}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
           <TextField
-            label="Expire Date"
-            type="date"
+            label="Upcycle Buffer (days)"
+            type="number"
             fullWidth
-            InputLabelProps={{
-              shrink: true,
+            value={upcycleBuffer}
+            onChange={(e) => setUpcycleBuffer(parseInt(e.target.value, 10) || 0)}
+            inputProps={{ min: 0 }}
+            InputProps={{
+              style: { backgroundColor: 'white' } // Ensure background is white
             }}
-            value={expireDate}
-            onChange={(e) => setExpireDate(e.target.value)}
           />
+        </Grid>
+        <Grid item xs={12} sm={12} md={6}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => setFilterUpscale(!filterUpscale)}
+          >
+            {filterUpscale ? 'Show All' : 'Filter Upscale'}
+          </Button>
         </Grid>
       </Grid>
 
       <Grid container spacing={4}>
-        {items.map((item, index) => (
+        {filteredItems.map((item, index) => (
           <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-            <Card style={{
+            <Card style={{ 
               backgroundColor: getBackgroundColor(item.expiresAt),
-              color: getBackgroundColor(item.expiresAt) === '#F44336' ? 'white' : 'black'
+              color: getBackgroundColor(item.expiresAt) === '#F44336' ? 'white' : 'black' 
             }}>
               <CardHeader
                 avatar={
