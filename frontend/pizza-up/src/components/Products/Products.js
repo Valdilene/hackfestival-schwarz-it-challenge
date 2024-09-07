@@ -27,7 +27,6 @@ const ItemList = () => {
     axios.get('/api/articles')
       .then(response => {
         // Limit the data to the first 20 items
-        const limitedData = response.data.slice(0, 20);
         setItems(response.data);
       })
       .catch(error => {
