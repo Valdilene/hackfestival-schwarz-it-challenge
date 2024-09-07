@@ -1,17 +1,11 @@
+import json
 from openai import OpenAI, Completion
-from enum import Enum
+from upcycle_recipes import Ingredient, PizzaIngredientCategory, Recipe
 
-MODEL = "gpt-4o-mini"
-
-class PizzaIngredientClass(Enum):
-    Sauce = 'sauce ingredient'
-    Protein = 'protein'
-    Cheese = 'cheese'
-    Veggie = 'veggie'
-    Topping = 'topping'
+OPEN_AI_MODEL = "gpt-4o-mini"
 
 
-def get_pizza_recipe_with_ingredients(ingredients: list[str], openai_client):
+def add_instructions_to_recipe(recipe: Recipe, openai_client: OpenAI):
     """generate a recepe of pizza, given the ingredients
 
     Args:
@@ -21,44 +15,62 @@ def get_pizza_recipe_with_ingredients(ingredients: list[str], openai_client):
     Returns:
         str: Markdown format for preparing a pizza
     """
+    ingredients = [i.name for i in  recipe.ingredients]
     completion = openai_client.chat.completions.create(
-        model=MODEL,
+        model=OPEN_AI_MODEL,
         messages=[
             {"role": "system", "content": "You are a helpful assistant."},
             {
                 "role": "user",
-                "content": f"What kind of pizza can you make with {', '.join(ingredients)}",
+                "content": (
+                    "Provide a pizza recipe you can make with the ingredients below and a creative name for it."
+                    "Respond **only** with the output in raw JSON format without any additional text or markdown. "
+                    "the output has to be in the format name: creative_name, recipe: recipe instructions as a list"
+                    f"Ingredients {', '.join(ingredients)}"
+
+                ),
             },
         ],
     )
-    return completion.choices[0].message.content
+    recipe_response = json.loads(completion.choices[0].message.content)
+    recipe.instructions_md = recipe_response["recipe"]
+    recipe.name = recipe_response["name"]
+    return recipe
 
 
-def categorize_ingredient(ingredient: str, openai_client) -> PizzaIngredientClass:
+def classify_ingredients(ingredients: list[Ingredient], openai_client: OpenAI) -> list[Ingredient]:
     """gets an ingredient input and classifies it in the following categories:
         'sauce ingredient', 'protein', 'cheese', 'veggie', or 'topping'
 
     Args:
-        ingredient (str): name of the ingredient
+        ingredient (str): name of the ingredient. One name ca only occur once
         openai_client (OpenAI): open AI client
 
     Returns:
         PizzaIngredientClass: class for the queried ingredient
     """
-    ingredient_classes = " ,".join([e.value for e in PizzaIngredientClass])
-    prompt = f"Classify the following ingredient for pizza preparation as one of the following categories: {ingredient_classes}, or 'topping'. Respond with only the category name: '{ingredient}'"
+    ingredient_classes = " ,".join([e.value for e in PizzaIngredientCategory])
+    
+    # map all ingredient objects by name
+    mapped_ingredients = {i.name: i for i in ingredients}
+    print(ingredient_classes)
+    prompt = (
+        f"Classify the following ingredients for pizza preparation as one of the following categories: "
+        "{ingredient_classes}"
+        "Respond **only** with the output in raw JSON format without any additional text or markdown. "
+        "the output has to be in the format ingredient: class"
+        f"Ingredients: {[i.name for i in ingredients]}"
+    )
     completion = openai_client.chat.completions.create(
-        model=MODEL,
+        model=OPEN_AI_MODEL,
         messages=[
             {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": prompt},
         ],
     )
-    return PizzaIngredientClass(completion.choices[0].message.content.strip())
-
-client = OpenAI()
-
-# with open("response.md", "w") as response_file:
-#     response_file.write(get_pizza_recipe_with_ingredients(["cheese", "chicken breast", "cherry tomatoes"], client))
-
-print(categorize_ingredient("chicken breast", client))
+    categories = completion.choices[0].message.content.strip()
+    parsed_categories = json.loads(categories)
+    for ingredient_name, category in parsed_categories.items():
+        mapped_ingredients[ingredient_name].category = category
+        
+    return [v for k, v in mapped_ingredients]
