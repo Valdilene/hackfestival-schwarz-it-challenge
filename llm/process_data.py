@@ -10,9 +10,9 @@ def process_foods(ingredients):
 
     recipes = split_ingredients_over_recipes(classified_ingredients)
 
-    for recipe in recipes:
-        recipes = add_instructions_to_recipe(recipe, openai_client)
-        with open(f"test_result/{recipe.name}.md", "w") as recipe_file:
+    with open(f"test_result.md", "w") as recipe_file:
+        for recipe in recipes:
+            recipes = add_instructions_to_recipe(recipe, openai_client)
             recipe_file.write(f"# {recipe.name}")
             recipe_file.write("\n\n## Ingredients:\n* ")
             recipe_file.write(
@@ -36,3 +36,4 @@ def process_foods(ingredients):
                 )
             )
             recipe_file.write("\n```\n")
+            recipe_file.write("\n\n")
