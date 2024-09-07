@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'user',
-    'registration',
+    'item',
+    'upCycleRequest',
 ]
 
 MIDDLEWARE = [
