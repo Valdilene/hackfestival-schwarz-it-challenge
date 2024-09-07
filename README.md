@@ -30,3 +30,10 @@ python3 -m venv .venv
 . .venv/bin/activate
 pip install -r backend/requirements.yml
 ```
+
+# Ask chatGPT
+
+```
+export OPENAI_API_KEY="ask alex for a token"
+python lllm/ask_chatGPT.py
+```
