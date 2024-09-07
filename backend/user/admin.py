@@ -7,3 +7,5 @@ from django.contrib.auth.admin import UserAdmin
 class UserAdmin(UserAdmin):
     list_display = ('id', 'code')
 
+    ordering = ('code',)
+

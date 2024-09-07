@@ -1,4 +1,4 @@
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.response import Response
 
 from .models import UpCycleRequest
@@ -13,7 +13,7 @@ class UpCycleRequestListCreateView(ListCreateAPIView):
     serializer_class = UpCycleRequestSerializer
 
 
-class UpCycleRequestRetrieveUpdateView(RetrieveUpdateAPIView):
+class UpCycleRequestRetrieveUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     queryset = UpCycleRequest.objects.all()
     serializer_class = UpCycleRequestSerializer
     lookup_url_kwarg = 'id'

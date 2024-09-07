@@ -9,4 +9,4 @@ class UpCycleRequest(models.Model):
     store = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.item} {self.quantity}'
+        return f' Request {self.id} '
