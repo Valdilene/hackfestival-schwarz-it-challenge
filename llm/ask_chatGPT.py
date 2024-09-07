@@ -49,6 +49,8 @@ def classify_ingredients(ingredients: list[Ingredient], openai_client: OpenAI) -
     Returns:
         PizzaIngredientClass: class for the queried ingredient
     """
+    if not any(ingredients):
+        raise ValueError("There are no ingredients to make pizza from")
     ingredient_classes = " ,".join([e.value for e in PizzaIngredientCategory])
     
     # map all ingredient objects by name
