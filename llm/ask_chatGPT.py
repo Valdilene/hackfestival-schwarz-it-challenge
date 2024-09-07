@@ -33,7 +33,7 @@ def add_instructions_to_recipe(recipe: Recipe, openai_client: OpenAI):
         ],
     )
     recipe_response = json.loads(completion.choices[0].message.content)
-    recipe.instructions_md = recipe_response["recipe"]
+    recipe.instructions = recipe_response["recipe"]
     recipe.name = recipe_response["name"]
     return recipe
 
@@ -73,4 +73,4 @@ def classify_ingredients(ingredients: list[Ingredient], openai_client: OpenAI) -
     for ingredient_name, category in parsed_categories.items():
         mapped_ingredients[ingredient_name].category = category
         
-    return [v for k, v in mapped_ingredients]
+    return [v for k, v in mapped_ingredients.items()]

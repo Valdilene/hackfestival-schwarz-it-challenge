@@ -11,6 +11,6 @@ with open("response.md", "w") as response_file:
     recipe = Recipe(ingredients=ingredients)
     recipe = ask_chatGPT.add_instructions_to_recipe(recipe, client)
     print(recipe.name)
-    print(recipe.instructions_md)
+    print(recipe.instructions)
 
 

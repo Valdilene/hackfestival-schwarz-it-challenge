@@ -21,7 +21,7 @@ class Recipe:
     ingredients: list[Ingredient]
     name: str = None
     marketing_motto: str = None
-    instructions_md: str = None
+    instructions: list = None
     
 def split_ingredients_over_recipes(ingredients: list[Ingredient]) -> list[Recipe]:
     """Creates a list of recipes that include equal quantities of maximum two ingredients from
