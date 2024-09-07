@@ -12,3 +12,4 @@ pycache
 */pycache
 
 .venv
+.vscode
