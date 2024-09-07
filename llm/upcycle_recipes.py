@@ -10,8 +10,10 @@ class PizzaIngredientCategory(Enum):
     Protein = "protein"
     Cheese = "cheese"
     Veggie = "vegetable"
+    Fruit = "fruit"
     Topping = "topping"
     Spice = "spice"
+    No = "not for pizza"
 
 @dataclass
 class Ingredient:
