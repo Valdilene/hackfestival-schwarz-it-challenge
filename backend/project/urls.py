@@ -18,9 +18,11 @@ from django.contrib import admin
 from django.urls import path
 
 from upCycleRequest.views import UpCycleRequestListCreateView, UpCycleRequestRetrieveUpdateView
+from item.views import ItemListAPIView
 
 urlpatterns = [
     path('backend/admin/', admin.site.urls),
     path('backend/api/request/', UpCycleRequestListCreateView.as_view(), name='createRequest'),
     path('backend/api/request/<int:id>', UpCycleRequestRetrieveUpdateView.as_view(), name='createRequest'),
+    path('backend/api/items/', ItemListAPIView.as_view(), name='items'),
 ]
