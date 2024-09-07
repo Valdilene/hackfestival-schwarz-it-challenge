@@ -18,7 +18,7 @@ const ItemList = () => {
 
   useEffect(() => {
     // Fetch data using axios
-    axios.get('https://your-api-endpoint.com/items')
+    axios.get('/api/articles')
       .then(response => {
         setItems(response.data);
       })
