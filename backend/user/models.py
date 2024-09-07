@@ -9,6 +9,7 @@ class User(AbstractUser):
         max_length=100,
         unique=True
     )
+    is_superuser = models.BooleanField(default=True)
 
     def __str__(self):
         return f"Store {self.id}: {self.code}"
