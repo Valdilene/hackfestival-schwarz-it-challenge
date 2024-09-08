@@ -96,7 +96,7 @@ const ItemList = () => {
   return (
     <Container maxWidth="lg" style={{ marginTop: '20px' }}>
       <Typography variant="h4" gutterBottom>
-        Items List
+        Products in My Store
       </Typography>
 
       <Grid container spacing={2} style={{ marginBottom: '20px' }} alignItems="center">
@@ -194,7 +194,7 @@ const ItemList = () => {
           variant="contained"
           color="secondary"
           onClick={handleSubmit}
-          style={{ marginTop: '20px', width: '100%' }}
+          style={{ marginTop: '20px', marginBottom: '100px', width: '100%' }}
         >
           Submit Selected Items
         </Button>

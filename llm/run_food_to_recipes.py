@@ -43,7 +43,23 @@ def fetch_ingredients_from_url(url: str) -> list[Ingredient]:
     return ingredients
 
 
-# Example usage:
+print (
+"""
+  _          _   _                       _          _____ _                _ 
+ | |        | | ( )                     | |        |  __ (_)              | |
+ | |     ___| |_|/ ___   _ __ ___   __ _| | _____  | |__) | __________ _  | |
+ | |    / _ \ __| / __| | '_ ` _ \ / _` | |/ / _ \ |  ___/ |_  /_  / _` | | |
+ | |___|  __/ |_  \__ \ | | | | | | (_| |   <  __/ | |   | |/ / / / (_| | |_|
+ |______\___|\__| |___/ |_| |_| |_|\__,_|_|\_\___| |_|   |_/___/___\__,_| (_)
+                                                                             
+"""
+)
+
+print("""
+
+give me a minute ...      
+""")
+
 url = "http://127.0.0.1:8000/backend/api/items/"  # Replace with the actual URL
 ingredients = fetch_ingredients_from_url(url)
 

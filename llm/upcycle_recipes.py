@@ -2,9 +2,11 @@ from dataclasses import dataclass
 from enum import Enum
 from collections import defaultdict
 
-# Does not need to be equal
+# on category of ingredients can be 50%
+# more or less than any other
 RECIPE_QUANTITY_MARGIN = 0.5
 
+# Possible ingredient category in a pizza
 class PizzaIngredientCategory(Enum):
     Sauce = "sauce ingredient"
     Protein = "protein"
@@ -37,7 +39,6 @@ def pop_first_ingredient_in_range(ingredients, min, max):
     for candidate_i in ingredients:
         if min <= float(candidate_i.quantity_g) <= max:
             ingredients = remove_ingredient_by_name(ingredients, candidate_i.name)
-            print("matched")
             return candidate_i
     return None
 
@@ -97,10 +98,8 @@ def split_ingredients_over_recipes(ingredients: list[Ingredient]) -> list[Recipe
 
             recipe_ingredients.append(selected_i)
         
-        print(" ".join([f"{i.name}[{i.quantity_g}]" for i in recipe_ingredients]))
         # Step 4: Create the recipe
         recipe = Recipe(ingredients=recipe_ingredients)
         recipes.append(recipe)
 
-    print(len(recipes))
     return recipes

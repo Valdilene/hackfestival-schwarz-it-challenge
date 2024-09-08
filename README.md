@@ -1,39 +1,34 @@
-# hackfestival-schwarz-it-challenge
+# PizzaUp
+
+> Code from hackfestival-schwarz-it-challenge 2024
 
 ## Getting Started
 
+* Start backend (django + postgres, needs docker)
 
-
-### Start using Docker
-
-```
-docker-compose -f docker/docker-compose.yml up
-```
-
-## Native Install
-
-### Ubuntu
-```
-sudo apt-get install libpq-dev
+```sh
+cd docker
+start_backend.sh
 ```
 
-### MacOS
+* Start frontend (react dev server)
 
-```
-brew install postgresql
-```
-
-### Install Packages
-
-```
-python3 -m venv .venv
-. .venv/bin/activate
-pip install -r backend/requirements.yml
+```sh
+cd frontend/pizza-up/
+npm start 
 ```
 
-# Ask chatGPT
+* Open web UI in [http://localhost:3000](http://localhost:3000)
 
-```
-export OPENAI_API_KEY="ask alex for a token"
-python lllm/ask_chatGPT.py
-```
+> Chose "Today" and window of upcycle, select upcycle products and send to backend.
+
+# Demo
+
+⬜ Good | 🟥 Expired | 🟨 UPCYCLE Possible | 🟩 Sent for upcycle
+
+![Demo](media/demo.gif)
+
+# Team
+
+
+
