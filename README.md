@@ -30,5 +30,11 @@ npm start
 
 # Team
 
+* **[Valdilene Silva Siqueira](https://www.linkedin.com/in/valdilenesiqueira/)**
 
+
+* **[Gabriele Ermacora](https://www.linkedin.com/in/gabriele-ermacora-phd/)**
+
+
+* **[Alexandru But](https://www.linkedin.com/in/alexandrubut/)**
 
