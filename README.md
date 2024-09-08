@@ -30,11 +30,13 @@ npm start
 
 # Team
 
-* **[Valdilene Silva Siqueira](https://www.linkedin.com/in/valdilenesiqueira/)**
+|  <img src="media/lene.jpeg" alt="drawing" width="200"/>  |  <img src="media/gab.jpeg" alt="drawing" width="200"/>   | <img src="media/alex.jpeg" alt="drawing" width="200"/>  |
+|---|---|---|
+|  **[Valdilene Siqueira](https://www.linkedin.com/in/valdilenesiqueira/)** |  **[Gabriele Ermacora](https://www.linkedin.com/in/gabriele-ermacora-phd/)**  | **[Alexandru But](https://www.linkedin.com/in/alexandrubut/)**   |
 
 
-* **[Gabriele Ermacora](https://www.linkedin.com/in/gabriele-ermacora-phd/)**
 
 
-* **[Alexandru But](https://www.linkedin.com/in/alexandrubut/)**
+
+
 
